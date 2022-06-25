@@ -1,14 +1,3 @@
-FROM node:12 AS build-stage
-
-WORKDIR /react-app
-COPY react-app/. .
-
-# You have to set this because it should be set during build time.
-
-# Build our React App
-RUN npm install
-RUN npm run build
-
 FROM python:3.10
 
 # Setup Flask environment
