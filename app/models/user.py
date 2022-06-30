@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model):
-    __table__ = 'users'
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
