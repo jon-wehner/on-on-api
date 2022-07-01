@@ -7,7 +7,8 @@ from flask_cors import CORS
 
 
 from .models import db, User
-from .seeds import seed, seed_commands
+from .seeds import seed_commands
+from .api import user_routes
 from .config import Config
 
 login_manager = LoginManager()
@@ -23,10 +24,12 @@ def create_app(test_config=None):
     else:
         app.config.from_mapping(test_config)
 
-    CORS(app)
-
     app.cli.add_command(seed_commands)
 
+    # Blueprints
+    app.register_blueprint(user_routes, url_prefix='/api/users')
+
+    CORS(app)
     db.init_app(app)
     Migrate(app, db)
 
