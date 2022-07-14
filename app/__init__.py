@@ -8,7 +8,7 @@ from flask_cors import CORS
 
 from .models import db, User
 from .seeds import seed_commands
-from .api import user_routes
+from .api import user_routes, auth_routes
 from .config import Config
 
 login_manager = LoginManager()
@@ -28,6 +28,7 @@ def create_app(test_config=None):
 
     # Blueprints
     app.register_blueprint(user_routes, url_prefix='/api/users')
+    app.register_blueprint(auth_routes, url_prefix='/api/auth')
 
     CORS(app)
     db.init_app(app)
